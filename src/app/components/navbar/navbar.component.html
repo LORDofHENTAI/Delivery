@@ -1,0 +1,18 @@
+<div class="navbar">
+    <span>Delivery</span>
+    <button mat-button [matMenuTriggerFor]="menu">
+
+        <span>Профиль</span>
+        <span class="material-icons">
+            arrow_drop_down
+        </span>
+        <span class="material-icons">
+            person
+        </span>
+    </button>
+    <mat-menu #menu="matMenu">
+        <a mat-menu-item>Помощь</a>
+        <a mat-menu-item routerLink="admin">Настройки</a>
+        <a mat-menu-item>Выход</a>
+    </mat-menu>
+</div>

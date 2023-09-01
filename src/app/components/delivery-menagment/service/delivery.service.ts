@@ -6,9 +6,7 @@ import { Status } from '../models/Status';
 import { NewDeliveryModel } from '../models/new-deliver-model';
 import { DeleteDeliveryModel } from '../models/delete-delivery-model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class DeliveryService {
 
   constructor(private http: HttpClient) { }

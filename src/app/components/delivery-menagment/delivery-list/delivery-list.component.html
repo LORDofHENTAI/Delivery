@@ -1,1 +1,78 @@
-<p>delivery-list works!</p>
+<div class="conteiner">
+    <div class="control-conteiner">
+        <button mat-icon-button matTooltip="Добавить запись"
+            (click)="openDialog()"><mat-icon>local_shipping</mat-icon></button>
+        <button mat-icon-button matTooltip="Печать"><mat-icon>print</mat-icon></button>
+        <mat-form-field class="example-form-field" appearance="outline">
+            <mat-label>Поиск</mat-label>
+            <input matInput type="text" [(ngModel)]="searchingRow" (keyup.enter)="search()">
+            <button [disabled]="!searchingRow" matSuffix mat-icon-button (click)="search()" matTooltip="Поиск">
+                <mat-icon>search</mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Выберите дату</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <button mat-icon-button matTooltip="Вывод данных по заданной дате"><mat-icon>calendar_today</mat-icon></button>
+        <button mat-icon-button matTooltip="Вывод данных после заданной даты"><mat-icon>date_range</mat-icon></button>
+    </div>
+    <div class="table-conteiner">
+        <table>
+            <tr>
+                <td *ngFor="let i of tableColumns">
+                    {{i}}
+                </td>
+            </tr>
+            <tr *ngFor="let d of deliverys">
+                <td>
+                    {{d.deliveryDate}}
+                </td>
+                <td>
+                    {{d.deliveryTime}}
+                </td>
+                <td>
+                    {{d.deliveryType}}
+                </td>
+                <td>
+                    {{d.provider}}
+                </td>
+                <td>
+                    {{d.downloadAdress}}
+                </td>
+                <td>
+                    {{d.uploadAdress}}
+                </td>
+                <td>
+                    {{d.count_Weight}}
+                </td>
+                <td>
+                    {{d.deliveryZone}}
+                </td>
+                <td>
+                    {{d.deliverySum}}
+                </td>
+                <td>
+                    {{d.clientPhone}}
+                </td>
+                <td>
+                    {{d.driver}}
+                </td>
+                <td>
+                    {{d.comment}}
+                </td>
+                <td>
+                    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                        <mat-icon>menu</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item style="color: green;">Изменить</button>
+                        <button mat-menu-item style="color: red;" (click)="deleteOrder(d.id) ">Удалить</button>
+                    </mat-menu>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

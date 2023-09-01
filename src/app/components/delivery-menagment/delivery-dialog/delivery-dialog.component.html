@@ -1,0 +1,204 @@
+<h2>Добавление записи</h2>
+<div class="add-conteiner">
+    <div class="date-time-conteiner">
+        <mat-form-field appearance="outline">
+            <mat-label>Выберите дату</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" (dateChange)="GetFreeDrivers()">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <input matInput value="{{timeSlider}}:00" [disabled]="true">
+        </mat-form-field>
+    </div>
+    <div class="selector-conteiner">
+        <mat-slider class="example-margin " [max]="20" [min]="9" [step]="1" showTickMarks>
+            <input matSliderThumb [(ngModel)]="timeSlider" #slider (click)="GetFreeDrivers()">
+        </mat-slider>
+        <div class="spans">
+            <span *ngFor="let s of spanSetting" [ngStyle]="{'color': s.class }">{{s.id}}</span>
+        </div>
+    </div>
+    <!-- <div class="form-conteiner">
+        <div class="form-box">
+            <span>
+                Свободно машин:
+            </span>
+            <span>
+                {{carsFree}}
+            </span>
+        </div>
+        <div class="form-box">
+            <span>
+                Тип доставки:
+            </span>
+            <mat-form-field appearance="outline">
+                <mat-label>Favorite food</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let food of foods" [value]="food">
+                        {{food}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="form-box">
+            <span>
+                Торговая точка:
+            </span>
+            <mat-form-field appearance="outline">
+                <mat-label>Favorite food</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let food of foods" [value]="food">
+                        {{food}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="form-box">
+            <span>
+                Поставщик:
+            </span>
+            <mat-form-field appearance="outline">
+                <input matInput>
+            </mat-form-field>
+        </div>
+        <div class="form-box">
+            <span>
+                Адрес загрузки:
+            </span>
+            <mat-form-field appearance="outline">
+                <input matInput>
+            </mat-form-field>
+        </div>
+        <div class="form-box">
+            <span>
+                Адрес выгрузки:
+            </span>
+            <mat-form-field appearance="outline">
+                <input matInput>
+            </mat-form-field>
+        </div>
+        <div class="form-box">
+            <span>
+                Кол-во поллетомест, ВЕС:
+            </span>
+            <mat-form-field appearance="outline">
+                <input matInput>
+            </mat-form-field>
+        </div>
+        <div class="form-box">
+            <span>
+                Зона доставки:
+            </span>
+            <mat-form-field appearance="outline">
+                <input matInput>
+            </mat-form-field>
+        </div>
+        <div class="form-box">
+            <span>
+                Сумма доставки:
+            </span>
+            <mat-form-field appearance="outline">
+                <input matInput>
+            </mat-form-field>
+        </div>
+        <div class="form-box">
+            <span>
+                Телефон:
+            </span>
+            <mat-form-field appearance="outline">
+                <input matInput>
+            </mat-form-field>
+        </div>
+        <div class="form-box">
+            <span>
+                Водитель
+            </span>
+            <mat-form-field appearance="outline">
+                <input matInput>
+            </mat-form-field>
+        </div>
+        <div class="form-box">
+            <span>
+                Примичание:
+            </span>
+            <mat-form-field appearance="outline">
+                <mat-label>Leave a comment</mat-label>
+                <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+            </mat-form-field>
+        </div>
+    </div> -->
+    <span style="font-size: 1.5em;">
+        Свободно машин:
+    </span>
+    <span style="font-size: 1.5em;" [ngStyle]="{'color': carsFree === 0 ? 'red': 'green'}">
+        {{carsFree}}
+    </span>
+    <div class="form-conteiner">
+        <div class="form-box">
+            <mat-form-field appearance="outline">
+                <mat-label>Тип доставки</mat-label>
+                <mat-select [(ngModel)]="selectDelivery">
+                    <mat-option *ngFor="let d of deliveryType" [value]="d">
+                        {{d}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <!-- <mat-form-field appearance="outline">
+                <mat-label>Адрес загрузки</mat-label>
+                <input matInput [(ngModel)]="adressDownload">
+            </mat-form-field> -->
+            <mat-form-field appearance="outline">
+                <mat-label>Поставщик</mat-label>
+                <input matInput [(ngModel)]="provider">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Зона доставки</mat-label>
+                <input matInput [(ngModel)]="deliveryZone">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Телефон</mat-label>
+                <input matInput [(ngModel)]="phoneNumber">
+            </mat-form-field>
+        </div>
+        <div class="form-box">
+            <mat-form-field appearance="outline">
+                <mat-label>Торговая точка</mat-label>
+                <mat-select [(ngModel)]="selectStore">
+                    <mat-option *ngFor="let s of storeType" [value]="s">
+                        {{s}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Адрес выгрузки</mat-label>
+                <input matInput [(ngModel)]="adressUpload">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Кол-во палетомест, ВЕС</mat-label>
+                <input matInput [(ngModel)]="count">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Водители</mat-label>
+                <mat-select [(ngModel)]="selectedDriver">
+                    <mat-option *ngFor="let d of freeDrivers" [value]="d">
+                        {{d}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Сумма доставки</mat-label>
+                <input matInput type="number" [(ngModel)]="deliverySum">
+            </mat-form-field>
+        </div>
+        <mat-form-field appearance="outline">
+            <mat-label>Примичание</mat-label>
+            <textarea matInput [(ngModel)]="comment"></textarea>
+        </mat-form-field>
+    </div>
+    <div class="dialog-control-conteiner">
+        <button mat-raised-button [disabled]="!selectedDriver || !adressUpload || !selectDelivery || !selectStore"
+            (click)="CreateDeliveryOrder()">Добавить</button>
+        <button mat-raised-button matDialogClose="false">Отмена</button>
+    </div>
+</div>

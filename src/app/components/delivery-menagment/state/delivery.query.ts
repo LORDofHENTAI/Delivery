@@ -1,9 +1,13 @@
 import { Query } from "@datorama/akita/src/lib";
 import { DeliveryState, DeliveryStore } from "./delivery.store";
-import { state } from "@angular/animations";
+import { state } from "@angular/animations"
 import { Observable } from "rxjs";
 import { DeliveryModel } from "../models/delivery.model";
+import { Injectable } from "@angular/core";
 
+@Injectable({
+    providedIn: 'root'
+})
 export class DelvieryQuery extends Query<DeliveryState>{
     constructor(private delivery: DeliveryStore) {
         super(delivery);

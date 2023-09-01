@@ -12,7 +12,6 @@ export const getInitialState = () => {
         isLoaded: false
     }
 }
-
 @Injectable({ providedIn: 'root' })
 @StoreConfig({ name: 'delivery' })
 export class DeliveryStore extends Store<DeliveryState>{

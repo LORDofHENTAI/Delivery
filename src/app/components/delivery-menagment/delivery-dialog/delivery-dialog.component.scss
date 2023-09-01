@@ -1,0 +1,47 @@
+.add-conteiner{
+    height: 70vh;
+    width: 800px;
+    padding-left: 20px;
+}
+.date-time-conteiner{
+    mat-form-field{
+        margin-right: 10px;
+        &:last-child{
+            width: 75px;
+        }
+    }
+}
+.selector-conteiner{
+    mat-slider {
+        width: 750px;
+        
+    }
+    .spans{
+        font-size: 1.5em;
+        span{
+            margin-left: 42px;
+        }
+        span:first-child{
+            margin-left: 0!important;
+        }
+        
+    }
+}
+.form-conteiner{
+    margin-top: 10px;
+    display: flex;
+    width: 100%;
+    mat-form-field{
+        margin-right: 15px;
+    }
+}
+.form-box{
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+.dialog-control-conteiner{
+    button{
+        margin-right: 10px;
+    }
+}

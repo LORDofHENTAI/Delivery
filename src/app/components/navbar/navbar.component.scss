@@ -1,0 +1,16 @@
+.navbar{
+    background-color: #6440b6;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    height: 5vh;
+    &:first-child{
+        color: white;
+        font-size: 2em;
+        font-weight: bold;
+    }
+    button{
+        color: white;
+        
+    }
+}

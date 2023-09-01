@@ -1,0 +1,50 @@
+*::-webkit-scrollbar,
+html *::-webkit-scrollbar {
+    height: 5px;
+    width: 4px;
+}
+*::-webkit-scrollbar-track,
+html *::-webkit-scrollbar-track {
+    background: inherit;
+    margin: 8px;
+}
+*::-webkit-scrollbar-thumb,
+html *::-webkit-scrollbar-thumb {
+    background-color: #6440b6;
+    border-radius: 5px;
+}
+.conteiner {
+    width: 100vw;
+    height: 95vh;
+    .control-conteiner {
+        padding-left: 5px;
+        padding-top: 10px;
+        display: flex;
+        align-items: start;
+        
+            button{
+                margin-right: 10px;
+            }
+        mat-form-field{
+            margin-right: 10px;
+        }
+    }
+    .table-conteiner {
+        width: 100vw;
+        height: 85.5vh;
+        overflow: auto;
+        
+        table{
+            border-collapse: collapse;
+            width: 100%;
+            text-align: center;
+            tr:first-child{
+                height: 45px;
+                color: white;
+                background-color: #6440b6;
+                
+            }
+        }
+    }
+    
+}
