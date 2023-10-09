@@ -40,31 +40,41 @@ export class DeliveryListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.deliveryQuery.getIsLoading().subscribe(res => this.loading = res)
-    this.deliveryQuery.getDelviery().subscribe(res => this.deliverys = res)
-    this.deliveryQuery.getLoaded().pipe(
-      filter(res => !res),
-      mergeMap(() => {
-        this.deliveryStore.setLoading(true);
+    // this.deliveryQuery.getIsLoading().subscribe(res => this.loading = res)
+    // this.deliveryQuery.getDelviery().subscribe(res => this.deliverys = res)
+    // this.deliveryQuery.getLoaded().pipe(
+    //   filter(res => !res),
+    //   mergeMap(() => {
+    //     this.deliveryStore.setLoading(true);
 
-        return this.deliveryService.GetDeliveryList('dev')
-      })
-    ).subscribe({
-      next: res => {
-        this.deliveryStore.update(state => {
-          return {
-            delivery: res
-          };
-        });
-        this.deliveryStore.setLoading(false)
+    //     return this.deliveryService.GetDeliveryList('dev')
+    //   })
+    // ).subscribe({
+    //   next: res => {
+    //     this.deliveryStore.update(state => {
+    //       return {
+    //         delivery: res
+    //       };
+    //     });
+    //     this.deliveryStore.setLoading(false)
+    //   },
+    //   error: error => {
+    //     console.log(error)
+    //     this.deliveryStore.setLoading(false)
+    //   }
+    // });
+    this.getDeliveryList()
+  }
+  getDeliveryList() {
+    this.deliveryService.GetDeliveryList(this.tokenService.getToken()).subscribe({
+      next: result => {
+        this.deliverys = result
       },
       error: error => {
         console.log(error)
-        this.deliveryStore.setLoading(false)
       }
-    });
+    })
   }
-
   search() {
     console.log('asd')
   }
@@ -100,6 +110,7 @@ export class DeliveryListComponent implements OnInit {
         switch (result.status) {
           case 'true':
             this.snackBar.openSnackBar('Запись удалена', this.action, 'green-snackbar');
+            this.getDeliveryList()
             break;
           case 'null':
             this.snackBar.openSnackBar('Ошибка отправления запроса', this.action, this.styleNoConnect);

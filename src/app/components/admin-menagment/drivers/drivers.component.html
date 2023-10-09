@@ -1,3 +1,42 @@
 <div class="conteiner">
-
+    <div class="control-box">
+        <mat-form-field appearance="outline">
+            <mat-label>Выберите месяц</mat-label>
+            <mat-select [(ngModel)]="selectedMonth" (selectionChange)="getDriverList()">
+                <mat-option *ngFor="let m of monthList" [value]="m.monthNumber">
+                    {{m.monthName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Введите имя водителя</mat-label>
+            <input matInput [(ngModel)]="newDriver">
+        </mat-form-field>
+        <button mat-raised-button (click)="addDriver()" [disabled]="!newDriver">Добавить водителя</button>
+        <button mat-raised-button style="color: red;" (click)="deleteDriver()"
+            [disabled]="!selectedDriver">Удалить</button>
+    </div>
+    <div class="table-box">
+        <table>
+            <tr>
+                <td>
+                    ФИО Водителя
+                </td>
+                <td *ngFor="let d of daysCount">
+                    {{d}}
+                </td>
+            </tr>
+            <tr *ngFor="let l of driverList">
+                <td (click)="selectDriver(l.id)"
+                    [ngStyle]="{'background-color': selectedDriver === l.id ? '#a27aff': 'white'}">
+                    {{l.name}}
+                </td>
+                <td *ngFor="let item of l.days; let i = index ; trackBy:trackByFn">
+                    <label>
+                        <input type="checkbox" [(ngModel)]="l.days[i]" (change)="editDriver(l)">
+                    </label>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>

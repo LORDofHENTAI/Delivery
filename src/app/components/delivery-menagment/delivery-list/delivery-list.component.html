@@ -28,7 +28,7 @@
             </tr>
             <tr *ngFor="let d of deliverys">
                 <td>
-                    {{d.deliveryDate}}
+                    {{d.deliveryDate| date: 'dd.MM.yyyy'}}
                 </td>
                 <td>
                     {{d.deliveryTime}}

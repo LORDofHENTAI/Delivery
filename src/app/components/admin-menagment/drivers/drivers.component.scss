@@ -1,4 +1,69 @@
 .conteiner{
-    width: 50vw;
-    height: 9;
+    width: 79vw;
+    height: 94.7vh;
+}
+.control-box{
+    padding-top: 10px;
+    mat-form-field{
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    button{
+        margin-left: 10px;
+    }
+}
+.table-box{
+    width: 100%;
+    margin-left: 10px;
+    border-radius: 20px;
+    border: 0.1px solid black;
+    overflow:hidden;
+    max-height: 90%;
+    table{
+            border-collapse: collapse;
+            width: 100%;
+            text-align: center;
+        tr:first-child{
+            background-color: #6440b6;
+            color: white;
+        }
+        tr{
+            height: 40px;
+        }
+        td{
+            border-left: #333 0.1px solid;
+            border-top: #333 0.1px solid;
+            width: 20px;
+        }
+        
+    }
+}
+
+label{
+    cursor: pointer;
+    height: 100%!important;
+    // background-color: red;
+}
+label input {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    appearance: none;
+    background-color: red;
+}
+input:checked::before, input:checked::after{
+    position: absolute;
+    margin-left: 39%;
+    margin-top: -25%;
+    content: ' ';
+    height: 20px;
+    width: 2px;
+    background-color: #333;
+}
+td label input:checked::before{
+    transform: rotate(45deg);
+}
+td label input:checked::after{
+    transform: rotate(-45deg);
 }
