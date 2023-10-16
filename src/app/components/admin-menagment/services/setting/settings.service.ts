@@ -19,10 +19,11 @@ export class SettingsService {
   GetSetting(data: string): Observable<SettingsModel> {
     return this.http.get<SettingsModel>(this.GetSettingURL + `?settingName=${data}`)
   }
-  GetSettingList(): Observable<string[]> {
-    return this.http.get<string[]>(this.GetSettingListURL)
+  GetSettingList(): Observable<SettingsModel[]> {
+    return this.http.get<SettingsModel[]>(this.GetSettingListURL)
   }
   UpdateSetting(data: UpdateSettingModel): Observable<Status> {
-    return this.http.post<Status>(this.UpdateSettingURL, data)
+    console.log(data)
+    return this.http.put<Status>(this.UpdateSettingURL, data)
   }
 }

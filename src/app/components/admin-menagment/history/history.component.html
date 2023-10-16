@@ -1,1 +1,61 @@
-<p>history works!</p>
+<div class="conteiner">
+    <div class="control-conteiner">
+        <mat-form-field appearance="outline">
+            <mat-label>Действие</mat-label>
+            <mat-select [(ngModel)]="actionSelected">
+                <mat-option *ngFor="let a of selectAction" [value]="a.value">
+                    {{a.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Выберите дату</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" [disabled]="!searchByDate">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-slide-toggle [(ngModel)]="searchByDate">Поиск по дате</mat-slide-toggle>
+        <button mat-raised-button (click)="getLogs()">Поиск</button>
+        <mat-form-field appearance="outline">
+            <mat-label>Поиск</mat-label>
+            <input matInput [(ngModel)]="input" [disabled]="!selectedFilter">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Критерий</mat-label>
+            <mat-select [(ngModel)]="selectedFilter">
+                <mat-option *ngFor="let f of filterDelivery" [value]="f.value">
+                    {{f.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="table-conteiner">
+        <table>
+            <tr>
+                <td>
+                    Действие
+                </td>
+                <td>
+                    Дата действия
+                </td>
+                <td>
+                    Пользователь
+                </td>
+                <td>
+                    Детально
+                </td>
+            </tr>
+            <tr *ngFor="let h of historyList">
+                <td>
+                    {{h.action}}
+                </td>
+                <td>
+                    {{h.actionDate| date: 'dd.MM.yyyy'}}
+                </td>
+                <td>
+                    {{h.user}}
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

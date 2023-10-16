@@ -25,7 +25,7 @@ import { DriversComponent } from './components/admin-menagment/drivers/drivers.c
 import { SettingsComponent } from './components/admin-menagment/settings/settings.component';
 import { HistoryComponent } from './components/admin-menagment/history/history.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,8 +56,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatDialogModule,
     MatSelectModule,
     MatSliderModule,
-    MatSnackBarModule
-
+    MatSnackBarModule,
+    MatSlideToggleModule
   ],
   providers: [MatNativeDateModule, { provide: MAT_DATE_LOCALE, useValue: 'ru-Ru' },],
   bootstrap: [AppComponent]

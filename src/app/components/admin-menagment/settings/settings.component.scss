@@ -1,0 +1,66 @@
+*::-webkit-scrollbar,
+html *::-webkit-scrollbar {
+    height: 5px;
+    width: 4px;
+}
+*::-webkit-scrollbar-track,
+html *::-webkit-scrollbar-track {
+    background: inherit;
+    margin: 8px;
+}
+*::-webkit-scrollbar-thumb,
+html *::-webkit-scrollbar-thumb {
+    background-color: #6440b6;
+    border-radius: 5px;
+}
+.conteiner{
+    width: 79vw;
+    height: 94.7vh;
+}
+.control-conteiner{
+    padding-top: 10px;
+    mat-form-field{
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    button{
+        margin-left: 10px;
+    }
+}
+.settings-conteiner{
+    display: flex;
+    padding-left: 10px;
+}
+.setting-box{
+    width: 300px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-right: 10px;
+    border: 0.1px solid black;
+    border-radius: 20px;
+    overflow: auto;
+
+    table{
+        border-collapse: collapse;
+        tr:first-child{
+            background-color: #6440b6;
+            color: white;
+            height: 30px;
+
+        }
+        tr{
+            border-bottom: 0.1px solid black;
+        }
+    }
+}
+.selectedTable{
+    tr:first-child{
+        background-color: #986cff!important;
+    }
+}
+.selectedRow{
+    background-color: #6440b6;
+    color: white;
+}

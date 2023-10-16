@@ -1,1 +1,29 @@
-<p>settings works!</p>
+<div class="conteiner">
+    <div class="control-conteiner">
+        <mat-form-field appearance="outline">
+            <mat-label>Введите значение</mat-label>
+            <input matInput [(ngModel)]="newValue">
+        </mat-form-field>
+        <button mat-raised-button style="color: green;" (click)="addSettingValue()"
+            [disabled]="setting.id ===''">Добавить параметр</button>
+        <button mat-raised-button style="color: red;" [disabled]="setting.id ===''"
+            (click)="deleteSettingValue()">Удалить</button>
+    </div>
+    <div class="settings-conteiner">
+        <div class="setting-box" *ngFor="let l of settingList" (click)="selectSetting(l)">
+            <table [ngClass]="{'selectedTable': setting.id === l.id}">
+                <tr>
+                    <td>
+                        {{l.settingName}}
+                    </td>
+                </tr>
+                <tr *ngFor="let s of l.settingValue" (click)="selectValue(s)"
+                    [ngClass]="{'selectedRow': selectedSettingValue === s}">
+                    <td>
+                        {{s}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

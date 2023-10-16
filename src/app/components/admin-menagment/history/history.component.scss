@@ -1,0 +1,49 @@
+*::-webkit-scrollbar,
+html *::-webkit-scrollbar {
+    height: 5px;
+    width: 4px;
+}
+*::-webkit-scrollbar-track,
+html *::-webkit-scrollbar-track {
+    background: inherit;
+    margin: 8px;
+}
+*::-webkit-scrollbar-thumb,
+html *::-webkit-scrollbar-thumb {
+    background-color: #6440b6;
+    border-radius: 5px;
+}
+.conteiner{
+    width: 79vw;
+    height: 94.7vh;
+}
+.control-conteiner{
+    padding-top: 10px;
+    mat-form-field{
+        margin-left: 20px;
+        margin-right: 10px;
+    }
+    button{
+        margin-left: 10px;
+    }
+}
+.table-conteiner{
+    width: 98%;
+    height: 88%;
+    margin-left: 20px;
+    border: 0.1px solid #6440b6;
+    border-radius: 20px;
+    overflow: auto;
+    table{
+        width: 100%;
+        border-collapse: collapse;
+        text-align: center;
+        tr:first-child{
+            background-color: #6440b6;
+            color: white;
+        }
+        tr{
+            height: 35px;
+        }
+    }
+}
