@@ -1,4 +1,4 @@
-<h2>Добавление записи</h2>
+<h2>{{logo}} записи</h2>
 <div class="add-conteiner">
     <div class="date-time-conteiner">
         <mat-form-field appearance="outline">
@@ -144,10 +144,6 @@
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-            <!-- <mat-form-field appearance="outline">
-                <mat-label>Адрес загрузки</mat-label>
-                <input matInput [(ngModel)]="adressDownload">
-            </mat-form-field> -->
             <mat-form-field appearance="outline">
                 <mat-label>Поставщик</mat-label>
                 <input matInput [(ngModel)]="provider">
@@ -198,7 +194,7 @@
     </div>
     <div class="dialog-control-conteiner">
         <button mat-raised-button [disabled]="!selectedDriver || !adressUpload || !selectDelivery || !selectStore"
-            (click)="CreateDeliveryOrder()">Добавить</button>
+            (click)="CreateDeliveryOrder()">{{buttonText}}</button>
         <button mat-raised-button matDialogClose="false">Отмена</button>
     </div>
 </div>

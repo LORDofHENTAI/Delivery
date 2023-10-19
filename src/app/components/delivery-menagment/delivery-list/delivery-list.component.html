@@ -16,7 +16,8 @@
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
-        <button mat-icon-button matTooltip="Вывод данных по заданной дате"><mat-icon>calendar_today</mat-icon></button>
+        <button mat-icon-button matTooltip="Вывод данных по заданной дате"
+            (click)="searchByDate()"><mat-icon>calendar_today</mat-icon></button>
         <button mat-icon-button matTooltip="Вывод данных после заданной даты"><mat-icon>date_range</mat-icon></button>
     </div>
     <div class="table-conteiner">
@@ -68,7 +69,7 @@
                         <mat-icon>menu</mat-icon>
                     </button>
                     <mat-menu #menu="matMenu">
-                        <button mat-menu-item style="color: green;">Изменить</button>
+                        <button mat-menu-item style="color: green;" (click)="openUpdateDialog(d)">Изменить</button>
                         <button mat-menu-item style="color: red;" (click)="deleteOrder(d.id) ">Удалить</button>
                     </mat-menu>
                 </td>

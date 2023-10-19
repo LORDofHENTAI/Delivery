@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { TokenService } from 'src/app/services/token/token.service';
 import { HistoryModel } from '../models/history-models/history-models';
 import { HistoryService } from '../services/history/history.service';
 import { formatDate } from '@angular/common';
 import { SnackBarService } from 'src/app/services/snack-bar/snack-bar.service';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { DeliveryModel } from '../../delivery-menagment/models/delivery.model';
 
 
 export interface ActionSetting {
@@ -18,7 +20,8 @@ export interface ActionSetting {
 export class HistoryComponent implements OnInit {
   constructor(
     private historyService: HistoryService,
-    private snackBar: SnackBarService
+    private snackBar: SnackBarService,
+    public dialog: MatDialog
   ) { }
   selectAction: ActionSetting[] = [
     { name: 'Все', value: 'all' },
@@ -117,5 +120,34 @@ export class HistoryComponent implements OnInit {
       }
     })
   }
+  openDialog(element: HistoryModel) {
+    const dialogRef = this.dialog.open(HistoryDialog, {
+      data: {
+        detail: element
+      }
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    }
+    );
+  }
+}
+
+@Component({
+  selector: 'app-history-dialog',
+  templateUrl: './history.dialog.html',
+  styleUrls: ['./history.component.scss']
+})
+export class HistoryDialog implements OnInit {
+  columnNames: string[] = ['Дата доставки', 'Время доставки', 'Тип доставки', 'Поставщик', 'Адрес выгрузки', 'Адрес загрузки', 'Вес, кол-во', 'Зона доставки', 'Сумма доставки', 'Телефон', 'Водитель', 'Комментарий']
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
+  newData: DeliveryModel
+  oldData: DeliveryModel
+  ngOnInit(): void {
+    this.newData = this.data.detail.newData
+    this.oldData = this.data.detail.oldData
+  }
+
 
 }

@@ -72,6 +72,7 @@ export class DeliveryListComponent implements OnInit {
       },
       error: error => {
         console.log(error)
+        this.snackBar.openSnackBar(this.messageNoConnect, this.action, this.styleNoConnect);
       }
     })
   }
@@ -79,12 +80,21 @@ export class DeliveryListComponent implements OnInit {
     console.log('asd')
   }
   searchByDate() {
-    this.nowFormatted = formatDate(this.selectedDate, 'dd.MM.yyyy', 'en-US');
+
+    this.deliveryService.DeliveryByDate(formatDate(this.selectedDate, 'dd.MM.yyyy', 'en-US')).subscribe({
+      next: result => {
+        console.log(result)
+        this.deliverys = result
+      },
+      error: error => {
+        console.log(error)
+        this.snackBar.openSnackBar(this.messageNoConnect, this.action, this.styleNoConnect);
+      }
+    })
   }
 
   openDialog() {
     const dialogRef = this.dialog.open(DeliveryDialogComponent);
-
     dialogRef.afterClosed().subscribe(result => {
       switch (result) {
         case 'true':
@@ -103,6 +113,34 @@ export class DeliveryListComponent implements OnInit {
           break;
       }
     });
+  }
+  openUpdateDialog(element: DeliveryModel) {
+    const dialogRef = this.dialog.open(DeliveryDialogComponent, {
+      data: {
+        update: element
+      }
+    })
+    dialogRef.afterClosed().subscribe({
+      next: result => {
+        switch (result) {
+          case 'true':
+            this.snackBar.openSnackBar('Запись обновлена', this.action, 'green-snackbar');
+            this.getDeliveryList()
+            break;
+          case 'null':
+            this.snackBar.openSnackBar('Ошибка отправления запроса', this.action, this.styleNoConnect);
+            break;
+          case 'BadAuth':
+            this.snackBar.openSnackBar('Неверный логин', this.action, this.styleNoConnect);
+            break;
+          case 'error':
+            this.snackBar.openSnackBar(this.messageNoConnect, this.action, this.styleNoConnect);
+            break;
+          default:
+            break;
+        }
+      }
+    })
   }
   deleteOrder(id: any) {
     this.deliveryService.DeleteDelivery(new DeleteDeliveryModel(this.tokenService.getToken(), id)).subscribe({

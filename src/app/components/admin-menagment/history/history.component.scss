@@ -15,7 +15,7 @@ html *::-webkit-scrollbar-thumb {
 }
 .conteiner{
     width: 79vw;
-    height: 94.7vh;
+    height: 94.5vh;
 }
 .control-conteiner{
     padding-top: 10px;
@@ -44,6 +44,22 @@ html *::-webkit-scrollbar-thumb {
         }
         tr{
             height: 35px;
+        }
+    }
+}
+.table-dialog-conteiner{
+    padding-left: 10px;
+    padding-right: 10px;
+    table{
+        width: 100%;
+        border-collapse: collapse;
+        text-align: center;
+        tr:first-child{
+            background-color: #6440b6;
+            color: white;
+        }
+        tr{
+            height: 40px;
         }
     }
 }

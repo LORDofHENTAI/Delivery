@@ -1,0 +1,105 @@
+<div class="dialog-conteiner">
+    <div class="table-dialog-conteiner" *ngIf="newData">
+        <h2>
+            Новые данные
+        </h2>
+        <table>
+            <tr>
+                <td *ngFor="let c of columnNames">
+                    {{c}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{newData.deliveryDate| date: 'dd.MM.yyyy'}}
+                </td>
+                <td>
+                    {{newData.deliveryTime}}
+                </td>
+                <td>
+                    {{newData.deliveryType}}
+                </td>
+                <td>
+                    {{newData.provider}}
+                </td>
+                <td>
+                    {{newData.downloadAdress}}
+                </td>
+                <td>
+                    {{newData.uploadAdress}}
+                </td>
+                <td>
+                    {{newData.count_Weight}}
+                </td>
+                <td>
+                    {{newData.deliveryZone}}
+                </td>
+                <td>
+                    {{newData.deliverySum}}
+                </td>
+                <td>
+                    {{newData.clientPhone}}
+                </td>
+                <td>
+                    {{newData.driver}}
+                </td>
+                <td>
+                    {{newData.comment}}
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="table-dialog-conteiner" *ngIf="oldData">
+        <h2>
+            Старые данные
+        </h2>
+        <table>
+            <tr>
+                <td *ngFor="let c of columnNames">
+                    {{c}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{oldData.deliveryDate | date: 'dd.MM.yyyy'}}
+                </td>
+                <td>
+                    {{oldData.deliveryTime}}
+                </td>
+                <td>
+                    {{oldData.deliveryType}}
+                </td>
+                <td>
+                    {{oldData.provider}}
+                </td>
+                <td>
+                    {{oldData.downloadAdress}}
+                </td>
+                <td>
+                    {{oldData.uploadAdress}}
+                </td>
+                <td>
+                    {{oldData.count_Weight}}
+                </td>
+                <td>
+                    {{oldData.deliveryZone}}
+                </td>
+                <td>
+                    {{oldData.deliverySum}}
+                </td>
+                <td>
+                    {{oldData.clientPhone}}
+                </td>
+                <td>
+                    {{oldData.driver}}
+                </td>
+                <td>
+                    {{oldData.comment}}
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Закрыть</button>
+</mat-dialog-actions>

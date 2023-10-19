@@ -25,6 +25,7 @@ export class DeliveryService {
     return this.http.get<DeliveryModel[]>(this.getDeliveryListURL + `?token=${token}`)
   }
   NewDelivery(body: NewDeliveryModel): Observable<Status> {
+    console.log(body)
     return this.http.post<Status>(this.newDeliveryURL, body)
   }
   DeleteDelivery(body: DeleteDeliveryModel): Observable<Status> {
@@ -39,11 +40,11 @@ export class DeliveryService {
   SearchDelivery(search: string): Observable<DeliveryModel[]> {
     return this.http.get<DeliveryModel[]>(this.searchDeliveryURL + `?search=${search}`)
   }
-  DeliveryByDate(date: Date): Observable<DeliveryModel[]> {
-    return this.http.get<DeliveryModel[]>(this.searchDeliveryURL + `?date=${date}`)
+  DeliveryByDate(date: string): Observable<DeliveryModel[]> {
+    return this.http.get<DeliveryModel[]>(this.deliveryByDateURL + `?date=${date}`)
   }
   SeliveryByNextDate(date: Date): Observable<DeliveryModel[]> {
-    return this.http.get<DeliveryModel[]>(this.searchDeliveryURL + `?date=${date}`)
+    return this.http.get<DeliveryModel[]>(this.seliveryByNextDateURL + `?date=${date}`)
   }
 
 }

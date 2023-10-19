@@ -23,9 +23,10 @@ import { MatSliderModule } from '@angular/material/slider';
 import { AdminComponent } from './components/admin-menagment/admin/admin.component';
 import { DriversComponent } from './components/admin-menagment/drivers/drivers.component';
 import { SettingsComponent } from './components/admin-menagment/settings/settings.component';
-import { HistoryComponent } from './components/admin-menagment/history/history.component';
+import { HistoryComponent, HistoryDialog } from './components/admin-menagment/history/history.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +37,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     AdminComponent,
     DriversComponent,
     SettingsComponent,
-    HistoryComponent
+    HistoryComponent,
+    HistoryDialog
   ],
   imports: [
     BrowserModule,

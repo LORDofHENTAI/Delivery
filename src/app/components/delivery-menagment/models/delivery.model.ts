@@ -1,7 +1,7 @@
 export class DeliveryModel {
     constructor(
         public id: string,
-        public deliveryDate?: string,
+        public deliveryDate?: Date,
         public deliveryTime?: number,
         public deliveryType?: string,
         public provider?: string,

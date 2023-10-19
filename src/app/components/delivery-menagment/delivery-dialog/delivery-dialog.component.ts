@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { DriversService } from '../../admin-menagment/services/drivers/drivers.service';
 import { formatDate } from '@angular/common';
 import { DelvieryTime } from '../../admin-menagment/models/driver-models/GetFreeDrivers';
@@ -9,7 +9,7 @@ import { DeliveryService } from '../service/delivery.service';
 import { DeliveryModel } from '../models/delivery.model';
 import { NewDeliveryModel } from '../models/new-deliver-model';
 import { TokenService } from 'src/app/services/token/token.service';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export interface SpanSetting {
   id: number,
   class: string
@@ -21,6 +21,7 @@ export interface SpanSetting {
   styleUrls: ['./delivery-dialog.component.scss']
 })
 export class DeliveryDialogComponent implements OnInit {
+  deliveryId: string = ''
   carsFree: number = 0
   foods: string[] = ['test', 'tester']
   selectedDate = new Date()
@@ -50,9 +51,31 @@ export class DeliveryDialogComponent implements OnInit {
     private deliveryService: DeliveryService,
     private tokenService: TokenService,
     public dialogRef: MatDialogRef<DeliveryDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
-
+  logo: string = 'Добавление'
+  buttonText: string = 'Добавить'
+  delivery: DeliveryModel = this.data.update
   ngOnInit(): void {
+    if (this.data) {
+      console.log(this.delivery)
+      this.logo = 'Изменение'
+      this.buttonText = 'Изменить'
+      this.selectedDate = this.data.update.deliveryDate
+      this.timeSlider = this.data.update.deliveryTime
+      this.selectDelivery = this.data.update.deliveryType
+      this.adressDownload = this.data.update.adressDownload
+      this.provider = this.data.update.provider
+      this.deliveryZone = this.data.update.deliveryZone
+      this.phoneNumber = this.data.update.clientPhone
+      this.selectStore = this.data.update.downloadAdress
+      this.adressUpload = this.data.update.uploadAdress
+      this.count = this.data.update.count_Weight
+      this.selectedDriver = this.data.update.driver
+      this.deliverySum = this.data.update.deliverySum
+      this.comment = this.data.update.comment
+      this.deliveryId = this.data.update.id
+    }
     this.GetFreeDrivers()
     this.getSettings()
   }
@@ -135,28 +158,54 @@ export class DeliveryDialogComponent implements OnInit {
     })
   }
   CreateDeliveryOrder() {
-    this.nowFormatted = formatDate(this.selectedDate, 'dd.MM.yyyy', 'en-US')
-    const deliveryModel = new DeliveryModel('', this.nowFormatted, this.timeSlider, this.selectDelivery, this.provider, this.selectStore, this.adressUpload, this.count, this.deliveryZone, this.deliverySum, this.phoneNumber, this.selectedDriver, this.comment)
-    this.deliveryService.NewDelivery(new NewDeliveryModel(this.tokenService.getToken(), deliveryModel)).subscribe({
-      next: result => {
-        switch (result.status) {
-          case 'true':
-            this.dialogRef.close('true');
-            break;
-          case 'null':
-            this.dialogRef.close('null');
-            break;
-          case 'BadAuth':
-            this.dialogRef.close('true');
-            break;
-          default:
-            break;
+    this.nowFormatted = formatDate(this.selectedDate, 'dd.MM.yyyy', 'en-US');
+    const deliveryModel = new DeliveryModel(this.deliveryId, this.selectedDate, this.timeSlider, this.selectDelivery, this.provider, this.selectStore, this.adressUpload, this.count, this.deliveryZone, this.deliverySum, this.phoneNumber, this.selectedDriver, this.comment)
+    if (this.data) {
+
+      this.deliveryService.UpdateDelivery(new NewDeliveryModel(this.tokenService.getToken(), this.nowFormatted, deliveryModel)).subscribe({
+        next: result => {
+          switch (result.status) {
+            case 'true':
+              this.dialogRef.close('true');
+              break;
+            case 'null':
+              this.dialogRef.close('null');
+              break;
+            case 'BadAuth':
+              this.dialogRef.close('true');
+              break;
+            default:
+              break;
+          }
+        },
+        error: error => {
+          console.log(error);
+          this.dialogRef.close('error');
         }
-      },
-      error: error => {
-        console.log(error);
-        this.dialogRef.close('error');
-      }
-    })
+      })
+    }
+    else {
+      this.deliveryService.NewDelivery(new NewDeliveryModel(this.tokenService.getToken(), this.nowFormatted, deliveryModel)).subscribe({
+        next: result => {
+          switch (result.status) {
+            case 'true':
+              this.dialogRef.close('true');
+              break;
+            case 'null':
+              this.dialogRef.close('null');
+              break;
+            case 'BadAuth':
+              this.dialogRef.close('true');
+              break;
+            default:
+              break;
+          }
+        },
+        error: error => {
+          console.log(error)
+          this.dialogRef.close('error');
+        }
+      })
+    }
   }
 }
