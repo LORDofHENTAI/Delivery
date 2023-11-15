@@ -55,10 +55,9 @@ export class DeliveryDialogComponent implements OnInit {
   ) { }
   logo: string = 'Добавление'
   buttonText: string = 'Добавить'
-  delivery: DeliveryModel = this.data.update
+  delivery: DeliveryModel
   ngOnInit(): void {
     if (this.data) {
-      console.log(this.delivery)
       this.logo = 'Изменение'
       this.buttonText = 'Изменить'
       this.selectedDate = this.data.update.deliveryDate
@@ -75,6 +74,7 @@ export class DeliveryDialogComponent implements OnInit {
       this.deliverySum = this.data.update.deliverySum
       this.comment = this.data.update.comment
       this.deliveryId = this.data.update.id
+      this.delivery = this.data.update
     }
     this.GetFreeDrivers()
     this.getSettings()

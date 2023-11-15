@@ -5,21 +5,20 @@ import { DeliveryModel } from '../models/delivery.model';
 import { Status } from '../models/Status';
 import { NewDeliveryModel } from '../models/new-deliver-model';
 import { DeleteDeliveryModel } from '../models/delete-delivery-model';
-
+import { environment } from 'src/app/environments/environment';
 @Injectable({ providedIn: 'root' })
 export class DeliveryService {
 
   constructor(private http: HttpClient) { }
 
-  baseURL = 'http://192.168.1.21:5239/'
-
-  getDeliveryListURL = this.baseURL + 'GetDeliveryList'
-  newDeliveryURL = this.baseURL + 'NewDelivery'
-  deleteDeliveryURL = this.baseURL + 'DeleteDelivery'
-  updateDeliveryURL = this.baseURL + 'UpdateDelivery'
-  searchDeliveryURL = this.baseURL + 'SearchDelivery'
-  deliveryByDateURL = this.baseURL + 'DeliveryByDate'
-  seliveryByNextDateURL = this.baseURL + 'SeliveryByNextDate'
+  getDeliveryListURL = environment.apiUrl + 'GetDeliveryList'
+  newDeliveryURL = environment.apiUrl + 'NewDelivery'
+  deleteDeliveryURL = environment.apiUrl + 'DeleteDelivery'
+  updateDeliveryURL = environment.apiUrl + 'UpdateDelivery'
+  searchDeliveryURL = environment.apiUrl + 'SearchDelivery'
+  deliveryByDateURL = environment.apiUrl + 'DeliveryByDate'
+  seliveryByNextDateURL = environment.apiUrl + 'SeliveryByNextDate'
+  printDeliveryURL = environment.apiUrl + 'PrintDelivery'
 
   GetDeliveryList(token: string): Observable<DeliveryModel[]> {
     return this.http.get<DeliveryModel[]>(this.getDeliveryListURL + `?token=${token}`)
@@ -46,5 +45,7 @@ export class DeliveryService {
   SeliveryByNextDate(date: Date): Observable<DeliveryModel[]> {
     return this.http.get<DeliveryModel[]>(this.seliveryByNextDateURL + `?date=${date}`)
   }
-
+  PrintDelivery(data: DeliveryModel[]) {
+    return this.http.post(this.printDeliveryURL, data, { responseType: 'blob' })
+  }
 }

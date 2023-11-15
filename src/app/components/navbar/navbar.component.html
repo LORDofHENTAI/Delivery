@@ -11,8 +11,8 @@
         </span>
     </button>
     <mat-menu #menu="matMenu">
-        <a mat-menu-item>Помощь</a>
+        <a mat-menu-item (click)="help()">Помощь</a>
         <a mat-menu-item routerLink="admin">Настройки</a>
-        <a mat-menu-item>Выход</a>
+        <a mat-menu-item (click)="onClickLogout()">Выход</a>
     </mat-menu>
 </div>

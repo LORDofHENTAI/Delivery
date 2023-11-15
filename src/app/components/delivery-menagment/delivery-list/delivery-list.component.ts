@@ -11,6 +11,7 @@ import { DeliveryDialogComponent } from '../delivery-dialog/delivery-dialog.comp
 import { DeleteDeliveryModel } from '../models/delete-delivery-model';
 import { TokenService } from 'src/app/services/token/token.service';
 import { SnackBarService } from 'src/app/services/snack-bar/snack-bar.service';
+import { saveAs } from 'file-saver';
 @Component({
   selector: 'app-delivery-list',
   templateUrl: './delivery-list.component.html',
@@ -77,7 +78,15 @@ export class DeliveryListComponent implements OnInit {
     })
   }
   search() {
-    console.log('asd')
+    this.deliveryService.SearchDelivery(this.searchingRow).subscribe({
+      next: result => {
+        this.deliverys = result
+      },
+      error: error => {
+        console.log(error)
+        this.snackBar.openSnackBar(this.messageNoConnect, this.action, this.styleNoConnect);
+      }
+    })
   }
   searchByDate() {
 
@@ -99,6 +108,7 @@ export class DeliveryListComponent implements OnInit {
       switch (result) {
         case 'true':
           this.snackBar.openSnackBar('Запись добавлена', this.action, 'green-snackbar');
+          this.getDeliveryList()
           break;
         case 'null':
           this.snackBar.openSnackBar('Ошибка отправления запроса', this.action, this.styleNoConnect);
@@ -163,6 +173,17 @@ export class DeliveryListComponent implements OnInit {
       error: error => {
         console.log(error)
         this.snackBar.openSnackBar(this.messageNoConnect, this.action, this.styleNoConnect);
+      }
+    })
+  }
+  print() {
+    this.deliveryService.PrintDelivery(this.deliverys).subscribe({
+      next: result => {
+        saveAs(result, 'Доставки')
+      },
+      error: error => {
+        console.log(error)
+        this.snackBar.openSnackBar(this.messageNoConnect, this.action, this.styleNoConnect)
       }
     })
   }

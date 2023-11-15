@@ -2,7 +2,7 @@
     <div class="control-conteiner">
         <button mat-icon-button matTooltip="Добавить запись"
             (click)="openDialog()"><mat-icon>local_shipping</mat-icon></button>
-        <button mat-icon-button matTooltip="Печать"><mat-icon>print</mat-icon></button>
+        <button mat-icon-button matTooltip="Печать" (click)="print()"><mat-icon>print</mat-icon></button>
         <mat-form-field class="example-form-field" appearance="outline">
             <mat-label>Поиск</mat-label>
             <input matInput type="text" [(ngModel)]="searchingRow" (keyup.enter)="search()">
